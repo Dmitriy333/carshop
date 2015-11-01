@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-1">
+      <dropForeignKeyConstraint baseTableName="address" constraintName="fk_address_street_id"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-2">
+      <dropForeignKeyConstraint baseTableName="jhi_user_authority" constraintName="fk_authority_name"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-3">
+      <dropForeignKeyConstraint baseTableName="car" constraintName="fk_car_carmodel_id"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-4">
+      <dropForeignKeyConstraint baseTableName="car_model" constraintName="fk_carmodel_carmake_id"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-5">
+      <dropForeignKeyConstraint baseTableName="dealer" constraintName="fk_dealer_address_id_id"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-6">
+      <dropForeignKeyConstraint baseTableName="dealer_feedback"
+                                constraintName="fk_dealerfeedback_dealer_id"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-7">
+      <dropForeignKeyConstraint baseTableName="dealer_feedback"
+                                constraintName="fk_dealerfeedback_user_id"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-8">
+      <dropForeignKeyConstraint baseTableName="jhi_persistent_audit_evt_data"
+                                constraintName="fk_evt_pers_audit_evt_data"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-9">
+      <dropForeignKeyConstraint baseTableName="street" constraintName="fk_street_town_id"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-10">
+      <dropForeignKeyConstraint baseTableName="town" constraintName="fk_town_country_id"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-11">
+      <dropForeignKeyConstraint baseTableName="jhi_user_authority" constraintName="fk_user_id"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-12">
+      <dropForeignKeyConstraint baseTableName="jhi_persistent_token"
+                                constraintName="fk_user_persistent_token"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-13">
+      <dropUniqueConstraint constraintName="address_id_id" tableName="dealer"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-14">
+      <dropUniqueConstraint constraintName="email" tableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-15">
+      <dropUniqueConstraint constraintName="idx_user_email" tableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-16">
+      <dropUniqueConstraint constraintName="idx_user_login" tableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-17">
+      <dropUniqueConstraint constraintName="login" tableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-18">
+      <dropTable tableName="address"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-19">
+      <dropTable tableName="car"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-20">
+      <dropTable tableName="car_body_type"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-21">
+      <dropTable tableName="car_make"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-22">
+      <dropTable tableName="car_model"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-23">
+      <dropTable tableName="country"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-24">
+      <dropTable tableName="dealer"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-25">
+      <dropTable tableName="dealer_feedback"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-26">
+      <dropTable tableName="default_car_meta"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-27">
+      <dropTable tableName="jhi_authority"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-28">
+      <dropTable tableName="jhi_persistent_audit_event"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-29">
+      <dropTable tableName="jhi_persistent_audit_evt_data"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-30">
+      <dropTable tableName="jhi_persistent_token"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-31">
+      <dropTable tableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-32">
+      <dropTable tableName="jhi_user_authority"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-33">
+      <dropTable tableName="street"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444684207907-34">
+      <dropTable tableName="town"/>
+   </changeSet>
+</databaseChangeLog>

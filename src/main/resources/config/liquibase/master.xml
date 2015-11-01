@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <include file="classpath:config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151009194730_added_entity_Country.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151009195328_added_entity_Town.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151009195741_added_entity_Street.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151009200116_added_entity_Address.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151012175332_added_entity_Dealer.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151012183515_added_entity_DealerFeedback.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151012185256_added_entity_CarBodyType.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151012185626_added_entity_CarMake.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151012185823_added_entity_CarModel.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151012191834_added_entity_Car.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151012192904_added_entity_DefaultCarMeta.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151012195640_added_entity_CarDetails.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151012201136_added_entity_Comment.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151012202513_added_entity_CarComment.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:config/liquibase/changelog/20151012204937_added_entity_CarImage.xml" relativeToChangelogFile="false"/>
+    <!-- JHipster will add liquibase changelogs here -->
+</databaseChangeLog>

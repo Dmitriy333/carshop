@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444685752379-1">
+      <createTable tableName="car_comment">
+         <column autoIncrement="true" name="id" type="BIGINT">
+            <constraints primaryKey="true" primaryKeyName="car_commentPK"/>
+         </column>
+         <column name="car_id" type="BIGINT"/>
+         <column name="comment_id" type="BIGINT"/>
+         <column name="user_id" type="BIGINT"/>
+      </createTable>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444685752379-2">
+      <createTable tableName="car_details">
+         <column autoIncrement="true" name="id" type="BIGINT">
+            <constraints primaryKey="true" primaryKeyName="car_detailsPK"/>
+         </column>
+         <column name="value" type="VARCHAR(255)">
+            <constraints nullable="false"/>
+         </column>
+         <column name="defaultCarMeta_id" type="BIGINT"/>
+      </createTable>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444685752379-3">
+      <createTable tableName="car_image">
+         <column autoIncrement="true" name="id" type="BIGINT">
+            <constraints primaryKey="true" primaryKeyName="car_imagePK"/>
+         </column>
+         <column name="car_id" type="BIGINT"/>
+      </createTable>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444685752379-4">
+      <createTable tableName="comment">
+         <column autoIncrement="true" name="id" type="BIGINT">
+            <constraints primaryKey="true" primaryKeyName="commentPK"/>
+         </column>
+         <column name="comment" type="CLOB">
+            <constraints nullable="false"/>
+         </column>
+         <column name="created_date" type="date">
+            <constraints nullable="false"/>
+         </column>
+         <column name="updated_date" type="date">
+            <constraints nullable="false"/>
+         </column>
+      </createTable>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444685752379-5">
+      <addColumn tableName="car_model">
+         <column name="carMake_id" type="bigint"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444685752379-6">
+      <addColumn tableName="car">
+         <column name="carModel_id" type="bigint"/>
+      </addColumn>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444685752379-7">
+      <addForeignKeyConstraint baseColumnNames="carMake_id"
+                               baseTableName="car_model"
+                               constraintName="FK_6bqxvgofei7a4rfymcxjgi7ra"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="car_make"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444685752379-8">
+      <addForeignKeyConstraint baseColumnNames="comment_id"
+                               baseTableName="car_comment"
+                               constraintName="FK_7prt6tfrs3f2m9a91r189nslu"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="comment"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444685752379-9">
+      <addForeignKeyConstraint baseColumnNames="car_id"
+                               baseTableName="car_comment"
+                               constraintName="FK_7rg7li3sh4ucp3spshy1sawae"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="car"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444685752379-10">
+      <addForeignKeyConstraint baseColumnNames="car_id"
+                               baseTableName="car_image"
+                               constraintName="FK_9cjpxm2x7w34kstditesdi1sx"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="car"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444685752379-11">
+      <addForeignKeyConstraint baseColumnNames="carModel_id"
+                               baseTableName="car"
+                               constraintName="FK_9futhcpo5rk0mujcskeiw9n0c"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="car_model"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444685752379-12">
+      <addForeignKeyConstraint baseColumnNames="defaultCarMeta_id"
+                               baseTableName="car_details"
+                               constraintName="FK_gxpt1cgpb8uqjo7oycgk1nlec"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="default_car_meta"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444685752379-13">
+      <addForeignKeyConstraint baseColumnNames="user_id"
+                               baseTableName="car_comment"
+                               constraintName="FK_jcovtoi6o5s8l91n0vhpb9ih4"
+                               deferrable="false"
+                               initiallyDeferred="false"
+                               referencedColumnNames="id"
+                               referencedTableName="jhi_user"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444685752379-14">
+      <dropForeignKeyConstraint baseTableName="car" constraintName="fk_car_carmodel_id"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444685752379-15">
+      <dropForeignKeyConstraint baseTableName="car_model" constraintName="fk_carmodel_carmake_id"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444685752379-16">
+      <dropUniqueConstraint constraintName="address_id_id" tableName="dealer"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444685752379-17">
+      <dropColumn columnName="car_make_id" tableName="car_model"/>
+   </changeSet>
+   <changeSet author="Dmitriy_Brashevets (generated)" id="1444685752379-18">
+      <dropColumn columnName="car_model_id" tableName="car"/>
+   </changeSet>
+</databaseChangeLog>

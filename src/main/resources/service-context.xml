@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <context:component-scan base-package="com.epam.bankingmanagement" />
+    <context:property-placeholder location="classpath:database.properties" />
+    <jpa:repositories
+        base-package="com.brashevets.carshop.repository" />
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${mysql.database.drivername}" />
+        <property name="url" value="${mysql.database.url}" />
+        <property name="username" value="${mysql.database.user}" />
+        <property name="password" value="${mysql.database.password}" />
+        <property name="connectionProperties">
+            <props>
+                <prop key="characterEncoding">utf8</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="liquibase" class="liquibase.integration.spring.SpringLiquibase">
+        <property name="dataSource" ref="dataSource" />
+        <property name="changeLog" value="classpath:config/liquibase/master.xml" />
+
+        <property name="changeLogParameters">
+            <map>
+                <entry key="db.name" value="${mysql.newswebapp.database}" />
+                <entry key="db.user" value="${mysql.database.user}" />
+                <entry key="db.password" value="${mysql.database.password}" />
+            </map>
+        </property>
+        <!-- contexts specifies the runtime contexts to use. -->
+        <property name="contexts" value="test, production" />
+    </bean>
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+        depends-on="liquibase">
+        <property name="dataSource" ref="dataSource" />
+         <property name="packagesToScan" value="com.brashevets.carshop.model"/>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
+            </props>
+        </property>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="showSql" value="true" />
+                <property name="database" value="MYSQL" />
+            </bean>
+        </property>
+    </bean>
+
+    <!-- <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> <property 
+        name="dataSource" ref="dataSource" /> </bean> -->
+
+    <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManagerJPA">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+    <tx:annotation-driven />
+    <bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+        <constructor-arg value="100" />
+    </bean>
+</beans>
