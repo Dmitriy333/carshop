@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.brashevets.carshop.model.Street;
+import com.brashevets.carshop.model.address.Street;
 import com.brashevets.carshop.repository.StreetRepository;
 
 @Transactional(readOnly = true)

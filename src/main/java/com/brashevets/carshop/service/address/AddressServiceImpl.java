@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.brashevets.carshop.model.Address;
+import com.brashevets.carshop.model.address.Address;
 import com.brashevets.carshop.repository.AddressRepository;
 import com.brashevets.carshop.repository.CountryRepository;
 import com.brashevets.carshop.repository.StreetRepository;

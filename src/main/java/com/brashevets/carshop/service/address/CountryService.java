@@ -2,7 +2,7 @@ package com.brashevets.carshop.service.address;
 
 import java.util.List;
 
-import com.brashevets.carshop.model.Country;
+import com.brashevets.carshop.model.address.Country;
 
 public interface CountryService {
     Country create(String name);

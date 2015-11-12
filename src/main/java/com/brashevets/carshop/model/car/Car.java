@@ -1,6 +1,7 @@
-package com.brashevets.carshop.model;
+package com.brashevets.carshop.model.car;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,60 +9,48 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Type;
-import org.joda.time.LocalDate;
-
-import com.brashevets.carshop.model.util.CustomLocalDateSerializer;
-import com.brashevets.carshop.model.util.ISO8601LocalDateDeserializer;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * A Car.
  */
 @Entity
-@Table(name = "car")
-//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Car implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    
-    //@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDate")
-    @JsonSerialize(using = CustomLocalDateSerializer.class)
-    @JsonDeserialize(using = ISO8601LocalDateDeserializer.class)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "date_issue")
-    private LocalDate dateIssue;
+    private Date dateIssue;
 
     @NotNull
-    @Min(value = 0)        
+    @Min(value = 0)
     @Column(name = "price", nullable = false)
     private Double price;
 
-    @Size(max = 500)        
+    @Size(max = 500)
     @Column(name = "description", length = 500)
     private String description;
-    
+
     @Column(name = "rookie")
     private Boolean rookie;
 
     @NotNull
-    @Min(value = 0)        
+    @Min(value = 0)
     @Column(name = "mileage", nullable = false)
     private Long mileage;
 
     @ManyToOne
-    private CarModel carModel;
+    @JoinColumn(name = "model_id")
+    private Model model;
 
     public Long getId() {
         return id;
@@ -71,11 +60,11 @@ public class Car implements Serializable {
         this.id = id;
     }
 
-    public LocalDate getDateIssue() {
+    public Date getDateIssue() {
         return dateIssue;
     }
 
-    public void setDateIssue(LocalDate dateIssue) {
+    public void setDateIssue(Date dateIssue) {
         this.dateIssue = dateIssue;
     }
 
@@ -111,12 +100,12 @@ public class Car implements Serializable {
         this.mileage = mileage;
     }
 
-    public CarModel getCarModel() {
-        return carModel;
+    public Model getModel() {
+        return model;
     }
 
-    public void setCarModel(CarModel carModel) {
-        this.carModel = carModel;
+    public void setModel(Model model) {
+        this.model = model;
     }
 
     @Override
@@ -130,7 +119,8 @@ public class Car implements Serializable {
 
         Car car = (Car) o;
 
-        if ( ! Objects.equals(id, car.id)) return false;
+        if (!Objects.equals(id, car.id))
+            return false;
 
         return true;
     }
@@ -142,13 +132,7 @@ public class Car implements Serializable {
 
     @Override
     public String toString() {
-        return "Car{" +
-                "id=" + id +
-                ", dateIssue='" + dateIssue + "'" +
-                ", price='" + price + "'" +
-                ", description='" + description + "'" +
-                ", rookie='" + rookie + "'" +
-                ", mileage='" + mileage + "'" +
-                '}';
+        return "Car{" + "id=" + id + ", dateIssue='" + dateIssue + "'" + ", price='" + price + "'" + ", description='"
+                + description + "'" + ", rookie='" + rookie + "'" + ", mileage='" + mileage + "'" + '}';
     }
 }

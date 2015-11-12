@@ -2,7 +2,7 @@ package com.brashevets.carshop.service.address;
 
 import java.util.List;
 
-import com.brashevets.carshop.model.Town;
+import com.brashevets.carshop.model.address.Town;
 
 public interface TownService {
 

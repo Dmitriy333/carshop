@@ -2,7 +2,7 @@ package com.brashevets.carshop.service.address;
 
 import java.util.List;
 
-import com.brashevets.carshop.model.Street;
+import com.brashevets.carshop.model.address.Street;
 
 public interface StreetService {
     Street create(Long countryId, String name);

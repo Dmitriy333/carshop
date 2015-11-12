@@ -1,4 +1,4 @@
-package com.brashevets.carshop.model;
+package com.brashevets.carshop.model.address;
 
 import java.io.Serializable;
 import java.util.Objects;

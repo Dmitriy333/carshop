@@ -14,7 +14,7 @@
 
     <changeSet id="2.3" author="Dzmitry_Brashavets">
         <comment>Rename 'make' column to 'name' in 'make' table</comment>
-        <renameColumn tableName="make" oldColumnName="make" newColumnName="name" columnDataType="varchar(100)"/>
+        <renameColumn tableName="make" oldColumnName="make" newColumnName="name" columnDataType="varchar(100)" />
     </changeSet>
 
     <changeSet id="2.4" author="Dzmitry_Brashavets">
@@ -24,7 +24,17 @@
 
     <changeSet id="2.5" author="Dzmitry_Brashavets">
         <comment>Rename 'type' column to 'name' in 'body_type' table'</comment>
-        <renameColumn tableName="body_type" oldColumnName="type" newColumnName="name" columnDataType="varchar(100)"/>
+        <renameColumn tableName="body_type" oldColumnName="type" newColumnName="name" columnDataType="varchar(100)" />
+    </changeSet>
+
+    <changeSet id="2.6" author="Dzmitry_Brashavets">
+        <comment>Rename 'car_model_id' column to 'model_id' in 'car' table'</comment>
+        <renameColumn tableName="car" oldColumnName="car_model_id" newColumnName="model_id" columnDataType="BIGINT" />
+    </changeSet>
+
+    <changeSet id="2.7" author="Dzmitry_Brashavets">
+        <comment>Rename 'car_make_id' column to 'make_id' in 'model' table'</comment>
+        <renameColumn tableName="model" oldColumnName="car_make_id" newColumnName="make_id" columnDataType="BIGINT" />
     </changeSet>
 
 </databaseChangeLog>

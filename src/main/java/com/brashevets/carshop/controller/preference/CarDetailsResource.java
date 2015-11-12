@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.brashevets.carshop.controller.util.HeaderUtil;
 import com.brashevets.carshop.controller.util.PaginationUtil;
-import com.brashevets.carshop.model.CarDetails;
+import com.brashevets.carshop.model.car.CarDetails;
 import com.brashevets.carshop.repository.CarDetailsRepository;
 
 /**

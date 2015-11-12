@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.brashevets.carshop.controller.util.HeaderUtil;
 import com.brashevets.carshop.controller.util.PaginationUtil;
-import com.brashevets.carshop.model.CarMake;
+import com.brashevets.carshop.model.car.Make;
 import com.brashevets.carshop.repository.CarMakeRepository;
 
 /**
@@ -43,12 +43,12 @@ public class CarMakeResource {
      * POST /carMakes -> Create a new carMake.
      */
     @RequestMapping(value = "/carMakes", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CarMake> createCarMake(@Valid @RequestBody CarMake carMake) throws URISyntaxException {
+    public ResponseEntity<Make> createCarMake(@Valid @RequestBody Make carMake) throws URISyntaxException {
         log.debug("REST request to save CarMake : {}", carMake);
         if (carMake.getId() != null) {
             return ResponseEntity.badRequest().header("Failure", "A new carMake cannot already have an ID").body(null);
         }
-        CarMake result = carMakeRepository.save(carMake);
+        Make result = carMakeRepository.save(carMake);
         return ResponseEntity.created(new URI("/api/carMakes/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert("carMake", result.getId().toString())).body(result);
     }
@@ -57,12 +57,12 @@ public class CarMakeResource {
      * PUT /carMakes -> Updates an existing carMake.
      */
     @RequestMapping(value = "/carMakes", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CarMake> updateCarMake(@Valid @RequestBody CarMake carMake) throws URISyntaxException {
+    public ResponseEntity<Make> updateCarMake(@Valid @RequestBody Make carMake) throws URISyntaxException {
         log.debug("REST request to update CarMake : {}", carMake);
         if (carMake.getId() == null) {
             return createCarMake(carMake);
         }
-        CarMake result = carMakeRepository.save(carMake);
+        Make result = carMakeRepository.save(carMake);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert("carMake", carMake.getId().toString()))
                 .body(result);
     }
@@ -71,19 +71,19 @@ public class CarMakeResource {
      * GET /carMakes -> get all the carMakes.
      */
     @RequestMapping(value = "/carMakes", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CarMake>> getAllCarMakes(Pageable pageable) throws URISyntaxException {
-        Page<CarMake> page = carMakeRepository.findAll(pageable);
+    public ResponseEntity<List<Make>> getAllCarMakes(Pageable pageable) throws URISyntaxException {
+        Page<Make> page = carMakeRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/carMakes");
-        return new ResponseEntity<List<CarMake>>(page.getContent(), headers, HttpStatus.OK);
+        return new ResponseEntity<List<Make>>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
      * GET /carMakes/:id -> get the "id" carMake.
      */
     @RequestMapping(value = "/carMakes/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CarMake> getCarMake(@PathVariable Long id, HttpServletResponse response) {
+    public ResponseEntity<Make> getCarMake(@PathVariable Long id, HttpServletResponse response) {
         log.debug("REST request to get CarMake : {}", id);
-        CarMake carMake = carMakeRepository.findOne(id);
+        Make carMake = carMakeRepository.findOne(id);
         if (carMake == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

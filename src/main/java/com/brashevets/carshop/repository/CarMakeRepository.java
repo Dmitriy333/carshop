@@ -3,12 +3,12 @@ package com.brashevets.carshop.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.brashevets.carshop.model.CarMake;
+import com.brashevets.carshop.model.car.Make;
 
 /**
  * Spring Data JPA repository for the CarMake entity.
  */
 @Repository
-public interface CarMakeRepository extends JpaRepository<CarMake,Long> {
+public interface CarMakeRepository extends JpaRepository<Make,Long> {
 
 }

@@ -1,38 +1,28 @@
-package com.brashevets.carshop.model;
-
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
+package com.brashevets.carshop.model.car;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
 /**
- * A Country.
+ * Make of the car.
  */
 @Entity
-@Table(name = "country")
-//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Country implements Serializable {
+public class Make implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull
-    @Column(name = "name", nullable = false)
+    @Column(nullable = false)
     private String name;
-
-    public Country(){
-        
-    }
-
-    public Country(String name) {
-        super();
-        this.name = name;
-    }
 
     public Long getId() {
         return id;
@@ -59,9 +49,9 @@ public class Country implements Serializable {
             return false;
         }
 
-        Country country = (Country) o;
+        Make carMake = (Make) o;
 
-        if (!Objects.equals(id, country.id))
+        if (!Objects.equals(id, carMake.id))
             return false;
 
         return true;
@@ -74,6 +64,6 @@ public class Country implements Serializable {
 
     @Override
     public String toString() {
-        return "Country{" + "id=" + id + ", name='" + name + "'" + '}';
+        return "CarMake{" + "id=" + id + ", make='" + name + "'" + '}';
     }
 }

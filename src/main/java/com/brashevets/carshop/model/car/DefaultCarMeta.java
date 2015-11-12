@@ -1,31 +1,32 @@
-package com.brashevets.carshop.model;
+package com.brashevets.carshop.model.car;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  * A DefaultCarMeta.
  */
 @Entity
 @Table(name = "default_car_meta")
-//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class DefaultCarMeta implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
-    @NotNull        
+    @NotNull
     @Column(name = "name", nullable = false)
     private String name;
 
-    @NotNull        
+    @NotNull
     @Column(name = "value", nullable = false)
     private String value;
 
@@ -64,7 +65,8 @@ public class DefaultCarMeta implements Serializable {
 
         DefaultCarMeta defaultCarMeta = (DefaultCarMeta) o;
 
-        if ( ! Objects.equals(id, defaultCarMeta.id)) return false;
+        if (!Objects.equals(id, defaultCarMeta.id))
+            return false;
 
         return true;
     }
@@ -76,10 +78,6 @@ public class DefaultCarMeta implements Serializable {
 
     @Override
     public String toString() {
-        return "DefaultCarMeta{" +
-                "id=" + id +
-                ", name='" + name + "'" +
-                ", value='" + value + "'" +
-                '}';
+        return "DefaultCarMeta{" + "id=" + id + ", name='" + name + "'" + ", value='" + value + "'" + '}';
     }
 }

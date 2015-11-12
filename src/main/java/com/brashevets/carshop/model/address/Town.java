@@ -1,4 +1,4 @@
-package com.brashevets.carshop.model;
+package com.brashevets.carshop.model.address;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -14,12 +14,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
- * A Street.
+ * A Town.
  */
 @Entity
-@Table(name = "street")
+@Table(name = "town")
 // @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Street implements Serializable {
+public class Town implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,28 +28,19 @@ public class Street implements Serializable {
     @NotNull
     @Column(name = "name", nullable = false)
     private String name;
-
-    @Column(name = "town_id", nullable = false)
-    private Long townId;
+    @Column(name = "country_id", nullable = false)
+    private Long countryId;
     @ManyToOne
-    @JoinColumn(name = "town_id", updatable = false, insertable = false)
-    private Town town;
+    @JoinColumn(name = "country_id", updatable = false, insertable = false)
+    private Country country;
 
-    public Long getTownId() {
-        return townId;
-    }
-
-    public void setTownId(Long townId) {
-        this.townId = townId;
-    }
-
-    public Street() {
+    public Town() {
 
     }
 
-    public Street(String name, Long townId) {
+    public Town(String name, Long countryId) {
         this.name = name;
-        this.townId = townId;
+        this.countryId = countryId;
     }
 
     public Long getId() {
@@ -68,12 +59,12 @@ public class Street implements Serializable {
         this.name = name;
     }
 
-    public Town getTown() {
-        return town;
+    public Country getCountry() {
+        return country;
     }
 
-    public void setTown(Town town) {
-        this.town = town;
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     @Override
@@ -85,12 +76,20 @@ public class Street implements Serializable {
             return false;
         }
 
-        Street street = (Street) o;
+        Town town = (Town) o;
 
-        if (!Objects.equals(id, street.id))
+        if (!Objects.equals(id, town.id))
             return false;
 
         return true;
+    }
+
+    public Long getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(Long countryId) {
+        this.countryId = countryId;
     }
 
     @Override
@@ -100,6 +99,6 @@ public class Street implements Serializable {
 
     @Override
     public String toString() {
-        return "Street{" + "id=" + id + ", name='" + name + "'" + '}';
+        return "Town{" + "id=" + id + ", name='" + name + "'" + '}';
     }
 }

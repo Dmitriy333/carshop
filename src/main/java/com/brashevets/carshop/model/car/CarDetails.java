@@ -1,37 +1,31 @@
-package com.brashevets.carshop.model;
+package com.brashevets.carshop.model.car;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  * A CarDetails.
  */
 @Entity
 @Table(name = "car_details")
-//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class CarDetails implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
     @NotNull        
-    @Column(name = "value", nullable = false)
+    @Column(nullable = false)
     private String value;
-
-   /* @ManyToMany(mappedBy = "carDetailss")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Car> cars = new HashSet<>();*/
 
     @ManyToOne
     private DefaultCarMeta defaultCarMeta;
@@ -52,14 +46,6 @@ public class CarDetails implements Serializable {
         this.value = value;
     }
 
-   /* public Set<Car> getCars() {
-        return cars;
-    }
-
-    public void setCars(Set<Car> cars) {
-        this.cars = cars;
-    }
-*/
     public DefaultCarMeta getDefaultCarMeta() {
         return defaultCarMeta;
     }

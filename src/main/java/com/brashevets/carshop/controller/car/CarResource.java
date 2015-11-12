@@ -22,16 +22,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.brashevets.carshop.controller.PathMapping;
 import com.brashevets.carshop.controller.util.HeaderUtil;
 import com.brashevets.carshop.controller.util.PaginationUtil;
-import com.brashevets.carshop.model.Car;
+import com.brashevets.carshop.model.car.Car;
 import com.brashevets.carshop.repository.CarRepository;
 
 /**
  * REST controller for managing Car.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/cars")
 public class CarResource {
 
     private final Logger log = LoggerFactory.getLogger(CarResource.class);
@@ -40,11 +41,9 @@ public class CarResource {
     private CarRepository carRepository;
 
     /**
-     * POST  /cars -> Create a new car.
+     * POST /cars -> Create a new car.
      */
-    @RequestMapping(value = "/cars",
-            method = RequestMethod.POST,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = PathMapping.DEFAULT, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Car> createCar(@Valid @RequestBody Car car) throws URISyntaxException {
         log.debug("REST request to save Car : {}", car);
         if (car.getId() != null) {
@@ -52,46 +51,37 @@ public class CarResource {
         }
         Car result = carRepository.save(car);
         return ResponseEntity.created(new URI("/api/cars/" + result.getId()))
-                .headers(HeaderUtil.createEntityCreationAlert("car", result.getId().toString()))
-                .body(result);
+                .headers(HeaderUtil.createEntityCreationAlert("car", result.getId().toString())).body(result);
     }
 
     /**
-     * PUT  /cars -> Updates an existing car.
+     * PUT /cars -> Updates an existing car.
      */
-    @RequestMapping(value = "/cars",
-        method = RequestMethod.PUT,
-        produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = PathMapping.DEFAULT, method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Car> updateCar(@Valid @RequestBody Car car) throws URISyntaxException {
         log.debug("REST request to update Car : {}", car);
         if (car.getId() == null) {
             return createCar(car);
         }
         Car result = carRepository.save(car);
-        return ResponseEntity.ok()
-                .headers(HeaderUtil.createEntityUpdateAlert("car", car.getId().toString()))
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert("car", car.getId().toString()))
                 .body(result);
     }
 
     /**
-     * GET  /cars -> get all the cars.
+     * GET /cars -> get all the cars.
      */
-    @RequestMapping(value = "/cars",
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Car>> getAllCars(Pageable pageable)
-        throws URISyntaxException {
+    @RequestMapping(value = PathMapping.DEFAULT, method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Car>> getAllCars(Pageable pageable) throws URISyntaxException {
         Page<Car> page = carRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/cars");
         return new ResponseEntity<List<Car>>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
-     * GET  /cars/:id -> get the "id" car.
+     * GET /cars/:id -> get the "id" car.
      */
-    @RequestMapping(value = "/cars/{id}",
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Car> getCar(@PathVariable Long id, HttpServletResponse response) {
         log.debug("REST request to get Car : {}", id);
         Car car = carRepository.findOne(id);
@@ -102,10 +92,9 @@ public class CarResource {
     }
 
     /**
-     * DELETE  /cars/:id -> delete the "id" car.
+     * DELETE /cars/:id -> delete the "id" car.
      */
-    @RequestMapping(value = "/cars/{id}",
- method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> deleteCar(@PathVariable Long id) {
         log.debug("REST request to delete Car : {}", id);
         carRepository.delete(id);

@@ -16,7 +16,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.annotation.Timed;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.brashevets.carshop.controller.util.HeaderUtil;
 import com.brashevets.carshop.controller.util.PaginationUtil;
-import com.brashevets.carshop.model.CarModel;
+import com.brashevets.carshop.model.car.Model;
 import com.brashevets.carshop.repository.CarModelRepository;
 
 /**
@@ -44,12 +43,12 @@ public class CarModelResource {
      * POST /carModels -> Create a new carModel.
      */
     @RequestMapping(value = "/carModels", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CarModel> createCarModel(@Valid @RequestBody CarModel carModel) throws URISyntaxException {
+    public ResponseEntity<Model> createCarModel(@Valid @RequestBody Model carModel) throws URISyntaxException {
         log.debug("REST request to save CarModel : {}", carModel);
         if (carModel.getId() != null) {
             return ResponseEntity.badRequest().header("Failure", "A new carModel cannot already have an ID").body(null);
         }
-        CarModel result = carModelRepository.save(carModel);
+        Model result = carModelRepository.save(carModel);
         return ResponseEntity.created(new URI("/api/carModels/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert("carModel", result.getId().toString())).body(result);
     }
@@ -58,12 +57,12 @@ public class CarModelResource {
      * PUT /carModels -> Updates an existing carModel.
      */
     @RequestMapping(value = "/carModels", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CarModel> updateCarModel(@Valid @RequestBody CarModel carModel) throws URISyntaxException {
+    public ResponseEntity<Model> updateCarModel(@Valid @RequestBody Model carModel) throws URISyntaxException {
         log.debug("REST request to update CarModel : {}", carModel);
         if (carModel.getId() == null) {
             return createCarModel(carModel);
         }
-        CarModel result = carModelRepository.save(carModel);
+        Model result = carModelRepository.save(carModel);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert("carModel", carModel.getId().toString()))
                 .body(result);
     }
@@ -72,19 +71,19 @@ public class CarModelResource {
      * GET /carModels -> get all the carModels.
      */
     @RequestMapping(value = "/carModels", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<CarModel>> getAllCarModels(Pageable pageable) throws URISyntaxException {
-        Page<CarModel> page = carModelRepository.findAll(pageable);
+    public ResponseEntity<List<Model>> getAllCarModels(Pageable pageable) throws URISyntaxException {
+        Page<Model> page = carModelRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/carModels");
-        return new ResponseEntity<List<CarModel>>(page.getContent(), headers, HttpStatus.OK);
+        return new ResponseEntity<List<Model>>(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**
      * GET /carModels/:id -> get the "id" carModel.
      */
     @RequestMapping(value = "/carModels/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<CarModel> getCarModel(@PathVariable Long id, HttpServletResponse response) {
+    public ResponseEntity<Model> getCarModel(@PathVariable Long id, HttpServletResponse response) {
         log.debug("REST request to get CarModel : {}", id);
-        CarModel carModel = carModelRepository.findOne(id);
+        Model carModel = carModelRepository.findOne(id);
         if (carModel == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
