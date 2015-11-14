@@ -1,6 +1,11 @@
-/target/
-.settings/
-.project
-.springBeans
-.classPath
-.settings/
+/.idea
+/*.iml
+/*.iws
+/*.ipr
+/.sonar-ide.properties
+**/.settings
+**/.project
+**/.classpath
+/target
+/.sonar
+rest-services-logs
